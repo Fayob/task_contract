@@ -5,6 +5,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
+  const [tasks, setTasks] = useState([])
+  const [taskTitle, setTaskTitle] = useState("")
+  const [taskText, setTaskText] = useState("")
   const [provider, setProvider] = useState(null)
   const [contract, setContract] = useState(null)
   const [account, setAccount] = useState(null)
@@ -76,8 +79,9 @@ function App() {
       }
       <div>
         <input value={taskTitle} onChange={(e) => setTaskTitle(e.target.value)} placeholder="Task Title" />
-        <input value={taskText} onChange={(e) => setTaskText(e.target.value)} placeholder="Task Description" className="mt-2" />
-        <button onClick={addTask}>Add Task</button>
+        <input value={taskText} onChange={(e) => setTaskText(e.target.value)} placeholder="Task Description" />
+        <button onClick={addTask}>Add Task</button><br />
+        <button onClick={() => fetchTasks(contract)}>Refresh Tasks</button>
       </div>
       <div>
         {tasks.map((task) => (
